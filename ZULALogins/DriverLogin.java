@@ -11,6 +11,8 @@ public class DriverLogin {
         String url="jdbc:mysql://localhost:3306/zula";
         Scanner s= new Scanner(System.in);
         System.out.println("\n-----Login for Driver-----");
+        
+        //Getting login Credentials from user
         System.out.print("\nEnter your User Name: \t");
         String driverName= s.nextLine();
         System.out.print("Enter your Pass Code: \t");
@@ -23,7 +25,7 @@ public class DriverLogin {
             boolean b=false;
             while(verify.next())
             {
-                if(verify.getInt("pass")==cabPass && verify.getString("name").compareTo(driverName)==0) 
+                if(verify.getInt("pass")==cabPass && verify.getString("name").compareTo(driverName)==0) //Verification Process
                 {
                     System.out.println("\nLogged in Successfully !!!");
                     System.out.println("\n-----Driver Menu-----");
