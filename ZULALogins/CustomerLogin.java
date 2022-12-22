@@ -12,11 +12,14 @@ public class CustomerLogin {
         String url="jdbc:mysql://localhost:3306/zula";
         Scanner s= new Scanner(System.in);
         System.out.println("\n-----Login for Customer-----");
+        
+        //Getting Username and password from user
         System.out.print("\nEnter your User Name: \t");
         String customerName= s.nextLine();
         System.out.print("Enter your Pass Code: \t");
         int customerPass=s.nextInt();
         try{
+            //JDBC Connection between the program and database in MySQL is established
             Connection con=DriverManager.getConnection(url,"root", "Priyalini@2");
             Statement zula=con.createStatement();
             ResultSet verify=zula.executeQuery("select * from customers where name='"+customerName+"';");
@@ -24,6 +27,7 @@ public class CustomerLogin {
             boolean b=false;
             while(verify.next())
             {
+                //Checking whether the given values are valid
                 if(verify.getInt("pass")==customerPass) 
                 {
                     b=true;
@@ -31,7 +35,7 @@ public class CustomerLogin {
                     break;
                 }
             }
-            if(b==false)
+            if(b==false) //If not valid - Creation of new account for user
             {
                 System.out.println("\nWrong Customer Name / Passcode");
                 System.out.println("\nDo you want to register? (No: 0 / Yes: 1)");
@@ -58,11 +62,13 @@ public class CustomerLogin {
                     totalRows.next();
                     int rows = totalRows.getInt(1);
                     rows++;
+                    
+                    //Updating Customers details by adding new acoount details
                     zula.executeUpdate("insert into customers values ("+rows+",'"+newName+"',"+newPass+","+age+")");
                     System.out.println("\nDetails Added Successfully!\n\nYou can re-login again....");
                 }
             }
-            else
+            else //if Verification is successful
             {
                 System.out.println("\nLogged in Successfully !!!");
                 boolean c=true;
