@@ -9,9 +9,13 @@ public class View{
         Connection con;
         try 
         {
+            //JDBC Connection is established
             con = DriverManager.getConnection(url,"root", "Priyalini@2");
             Statement curr=con.createStatement();
+         
             Scanner s= new Scanner(System.in);
+            
+            //Checking the contribution of each cab 
             System.out.print("\nTo check the contribution of each cab, enter Cab ID:\t");
             int cabID= s.nextInt();
             ResultSet fare=curr.executeQuery("select sum(fare) from history where cabid="+cabID+";");
@@ -46,6 +50,8 @@ public class View{
         {
             con = DriverManager.getConnection(url,"root", "Priyalini@2");
             Statement curr=con.createStatement();
+            
+            //Looking out the overall history of rides
             System.out.println("\nThe Table:");
             ResultSet currentHistory=curr.executeQuery("Select * from history;");
             System.out.println("\nCab ID\t\tDriver Name\tCustomer ID\tCustomer Name\tSource Location\t\tDestination Location\tFare\tZULA Commission");
@@ -65,6 +71,8 @@ public class View{
         {
             Connection con = DriverManager.getConnection(url,"root", "Priyalini@2");
             Statement curr=con.createStatement();
+            
+            //List of rides undertaken by the particular cab
             ResultSet currentHistory=curr.executeQuery("Select source, destination, customerid,fare,comm from history where cabid='"+cabID+ "';");
             System.out.println("\n\nCustomer ID\tSource Location\t\tDestination Location\tFare\tZULA Commission");
             while(currentHistory.next())
@@ -84,6 +92,8 @@ public class View{
         {
             Connection con = DriverManager.getConnection(url,"root", "Priyalini@2");
             Statement curr=con.createStatement();
+            
+            //List of all transactions of the customer;
             ResultSet currentHistory=curr.executeQuery("Select source, destination, cabid,fare from history where customerid='"+customerID+ "';");
             System.out.println("\n\nCab ID\tSource Location\t\tDestination Location\tFare");
             while(currentHistory.next())
@@ -104,6 +114,8 @@ public class View{
         {
             con = DriverManager.getConnection(url,"root", "Priyalini@2");
             Statement curr=con.createStatement();
+            
+            //Resetting all values i.e. Status of cabs and overall history back to original data
             curr.executeUpdate("delete from cabstatus");
             curr.executeUpdate("insert into cabstatus values (1,'D',0,'ready');");
             curr.executeUpdate("insert into cabstatus values (2,'G',0,'ready');");
