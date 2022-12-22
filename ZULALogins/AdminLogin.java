@@ -7,10 +7,14 @@ public class AdminLogin {
     {
         Scanner s= new Scanner(System.in);
         System.out.println("\n-----Login for Admin-----");
+        
+        //Getting username and password from user
         System.out.print("\nEnter User Name: \t");
         String adminName= s.nextLine();
         System.out.print("Enter Pass Code: \t");
         int adminID=s.nextInt();
+        
+        //Checking if it matches
         if(adminName.compareTo("Priyavarthan N")==0 && adminID==1510)
         {
             System.out.println("\nLogged in Successfully !!!");
